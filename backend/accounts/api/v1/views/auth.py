@@ -3,6 +3,9 @@ from django.contrib.auth import get_user_model
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
+
+from drf_spectacular.utils import extend_schema
 
 from accounts.api.v1.serializers.auth import SendOTPSerializer
 from accounts.services.otp import OTPService
@@ -12,8 +15,13 @@ from accounts.services.jwt import JWTService
 
 User = get_user_model()
 
-
+@extend_schema(
+    auth=[],
+    request=SendOTPSerializer,
+    responses={200: None},
+)
 class SendOTPView(APIView):
+    permission_classes = [AllowAny]
 
     def post(self, request):
 
@@ -42,8 +50,13 @@ class SendOTPView(APIView):
             },
             status=status.HTTP_200_OK,
         )
-    
+
+@extend_schema(
+    auth=[],
+    request=VerifyOTPSerializer,
+)  
 class VerifyOTPView(APIView):
+    permission_classes = [AllowAny]
 
     def post(self, request):
 

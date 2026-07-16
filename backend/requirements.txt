@@ -5,3 +5,4 @@ psycopg[binary]
 django-debug-toolbar
 requests
 djangorestframework-simplejwt
+drf-spectacular
