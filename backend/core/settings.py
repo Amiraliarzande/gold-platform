@@ -185,3 +185,11 @@ if SHOW_DEBUGGER_TOOLBAR:
 # SMS Config
 SMSAPIKEY = config("SMSAPIKEY")
 SMSLINENUMBER = config("SMSLINENUMBER")
+
+# djangorestframework-simplejwt config
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}

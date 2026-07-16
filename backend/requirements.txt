@@ -4,3 +4,4 @@ python-decouple
 psycopg[binary]
 django-debug-toolbar
 requests
+djangorestframework-simplejwt
