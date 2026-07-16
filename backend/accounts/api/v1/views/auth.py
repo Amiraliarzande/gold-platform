@@ -6,6 +6,7 @@ from rest_framework import status
 
 from accounts.api.v1.serializers.auth import SendOTPSerializer
 from accounts.services.otp import OTPService
+from accounts.services.sms import send_bulk_sms
 
 
 User = get_user_model()
@@ -27,8 +28,10 @@ class SendOTPView(APIView):
 
         otp = OTPService.create_or_update(user)
 
-        # بعداً:
-        # SMSService.send(phone_number, otp)
+        send_bulk_sms(
+            message_text=f"کد تایید شما: {otp}",
+            mobiles=[phone_number],
+        )
 
         return Response(
             {

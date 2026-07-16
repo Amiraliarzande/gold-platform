@@ -181,3 +181,7 @@ if SHOW_DEBUGGER_TOOLBAR:
         "127.0.0.1",
         "10.0.2.2",
     ]
+
+# SMS Config
+SMSAPIKEY = config("SMSAPIKEY")
+SMSLINENUMBER = config("SMSLINENUMBER")
