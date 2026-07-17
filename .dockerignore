@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+
+# Python
+**/__pycache__
+**/*.pyc
+**/*.pyo
+
+# Python Virtual Environment
+venv
+.env
+
+# Frontend
+frontend/node_modules
+frontend/.next
+
+# VS Code
+.vscode
+
+# OS
+.DS_Store
+Thumbs.db

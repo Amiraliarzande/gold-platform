@@ -35,6 +35,39 @@ services:
     depends_on:
       - db
 
+  frontend:
+    container_name: frontend
+
+    build:
+      context: .
+      dockerfile: ./dockerfiles/dev/next/Dockerfile
+
+    working_dir: /usr/src/app
+
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+
+    ports:
+      - "3000:3000"
+
+    command: npm run dev -- --hostname 0.0.0.0 --webpack
+
+    env_file:
+      - ./envs/dev/next/.env
+
+    environment:
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+
+    stdin_open: true
+    tty: true
+
+    restart: always
+
+    depends_on:
+      - backend
+
   smtp4dev:
     image: docker.arvancloud.ir/rnwood/smtp4dev:v3
     restart: always
