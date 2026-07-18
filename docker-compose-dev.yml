@@ -51,14 +51,10 @@ services:
     ports:
       - "3000:3000"
 
-    command: npm run dev -- --hostname 0.0.0.0 --webpack
+    command: npm run dev -- --hostname 0.0.0.0
 
     env_file:
       - ./envs/dev/next/.env
-
-    environment:
-      - WATCHPACK_POLLING=true
-      - CHOKIDAR_USEPOLLING=true
 
     stdin_open: true
     tty: true
