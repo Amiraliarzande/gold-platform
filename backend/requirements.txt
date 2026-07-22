@@ -6,3 +6,5 @@ django-debug-toolbar
 requests
 djangorestframework-simplejwt
 drf-spectacular
+django_ckeditor_5
+Pillow

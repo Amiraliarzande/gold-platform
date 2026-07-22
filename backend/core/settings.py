@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
 
     "accounts",
+    "shop",
 ]
 
 AUTH_USER_MODEL = "accounts.User"
