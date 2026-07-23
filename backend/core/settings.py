@@ -43,9 +43,12 @@ INSTALLED_APPS = [
 
     "rest_framework",
     "drf_spectacular",
+    "django_ckeditor_5",
 
     "accounts",
     "shop",
+    "review",
+    "wishlist",
 ]
 
 AUTH_USER_MODEL = "accounts.User"

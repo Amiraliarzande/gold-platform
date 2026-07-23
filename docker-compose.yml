@@ -5,7 +5,7 @@ services:
     container_name: db
     image: docker.arvancloud.ir/postgres:15-alpine
     volumes:
-      - ./postgres/data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
@@ -18,15 +18,16 @@ services:
 
   backend:
     container_name: backend
+    user: "${UID}:${GID}"
     build:
       context: .
       dockerfile: ./dockerfiles/dev/django/Dockerfile
     volumes:
-      - ./core:/usr/src/app
+      - ./backend:/usr/src/app
     working_dir: /usr/src/app
     command: python manage.py runserver 0.0.0.0:8000
     ports:
-      - 8000:8000
+      - 8888:8000
     environment:
       - DEBUG=True
     env_file:
@@ -34,6 +35,37 @@ services:
     restart: always
     depends_on:
       - db
+
+  frontend:
+    container_name: frontend
+
+    user: "${UID}:${GID}"
+
+    build:
+      context: .
+      dockerfile: ./dockerfiles/dev/next/Dockerfile
+
+    working_dir: /usr/src/app
+
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+
+    ports:
+      - "3000:3000"
+
+    command: npm run dev -- --hostname 0.0.0.0
+
+    env_file:
+      - ./envs/dev/next/.env
+
+    stdin_open: true
+    tty: true
+
+    restart: always
+
+    depends_on:
+      - backend
 
   smtp4dev:
     image: docker.arvancloud.ir/rnwood/smtp4dev:v3
@@ -48,6 +80,7 @@ services:
       - serverOptions__HostName=smtp4dev
 
 volumes:
+  postgres-data:
   smtp4dev-data:
 
     

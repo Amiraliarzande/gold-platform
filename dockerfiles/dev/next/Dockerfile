@@ -8,4 +8,8 @@ RUN npm ci
 
 COPY ./frontend .
 
+RUN chown -R node:node /usr/src/app
+
+USER node
+
 EXPOSE 3000

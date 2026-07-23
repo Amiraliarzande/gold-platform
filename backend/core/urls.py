@@ -46,6 +46,8 @@ urlpatterns = [
         name="redoc",
     ),
 
+    path("ckeditor5/", include("django_ckeditor_5.urls")),
+
     path("accounts/", include("accounts.urls")),
 ]
 
